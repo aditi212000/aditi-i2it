@@ -1,0 +1,537 @@
+{
+  "intents": [
+    {
+      "intent": "productfaq",
+      "examples": [
+        {
+          "text": "How do I access the settings?"
+        },
+        {
+          "text": "How do I set the time?"
+        },
+        {
+          "text": "How do I turn on the heater?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "enquiry",
+      "examples": [
+        {
+          "text": "Can I list of items?"
+        },
+        {
+          "text": "What are today's offers?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "location",
+      "examples": [
+        {
+          "text": "How can you go to Bandra Store?"
+        },
+        {
+          "text": "How can I reach Pune Sore?"
+        },
+        {
+          "text": "Where Dadar store is located?"
+        },
+        {
+          "text": "Can you tell me direction for Bandra Store?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "greeting",
+      "examples": [
+        {
+          "text": "Hi!!"
+        },
+        {
+          "text": "Good Morning!!"
+        },
+        {
+          "text": "Good Afternoon.."
+        },
+        {
+          "text": "Good Evening"
+        },
+        {
+          "text": "Hello there.."
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Thanks",
+      "examples": [
+        {
+          "text": "Ok Byee"
+        },
+        {
+          "text": "Thank you"
+        },
+        {
+          "text": "Thanks..."
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "greet",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Good Morning",
+          "synonyms": [
+            "GM"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Hello",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Good Afternoon",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Good Evening",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Hello there...",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "enquiry",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "offer",
+          "synonyms": [
+            "offers"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "list",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "location",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Pune",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Bandra",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Dadar",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "webhooks": [
+    {
+      "url": "https://eu-gb.functions.appdomain.cloud/api/v1/web/aditikanade16%40gmail.com_dev/default/discovery%20action.json",
+      "name": "main_webhook",
+      "headers": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Our store is located at Dadar Plaza"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1597487792149",
+      "conditions": "@location:Dadar",
+      "dialog_node": "response_2_1597487944044",
+      "previous_sibling": "response_8_1597487894157"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Out store is located in Bandra, Dadar, Pune"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1597487792149",
+      "conditions": "anything_else",
+      "dialog_node": "response_2_1597488728579",
+      "previous_sibling": "response_2_1597487944044"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Take a cab to Pune Station. It's just opposite to station"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1597487792149",
+      "conditions": "@location:Pune",
+      "dialog_node": "response_8_1597487894157",
+      "previous_sibling": "response_6_1597487852920"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Take a local train to Bandra.Out store is just outsidenthenstation"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1597487792149",
+      "conditions": "@location:(Bandra)",
+      "dialog_node": "response_6_1597487852920"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Good Afternoon there.."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1597487299309",
+      "conditions": "@greet:(Good Afternoon)",
+      "dialog_node": "response_10_1597487620700",
+      "previous_sibling": "response_1_1597487566603"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello there"
+              },
+              {
+                "text": "Hii"
+              },
+              {
+                "text": "Hello!!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1597487299309",
+      "conditions": "@greet:Hello",
+      "dialog_node": "response_3_1597657471739",
+      "previous_sibling": "response_10_1597487620700"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Good Morning.."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1597487299309",
+      "conditions": "@greet:(Good Morning)",
+      "dialog_node": "response_1_1597487566603"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Try Again"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_5_1597492382985",
+      "conditions": "anything_else",
+      "dialog_node": "response_8_1597493923390",
+      "previous_sibling": "response_1_1597492577125"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "<?context.webhook_result_1.passages.get(0).get(\"passage_text\").getAsString() ?>"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1597492382985",
+      "conditions": "$webhook_result_1",
+      "dialog_node": "response_1_1597492577125"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "source": "https://images.app.goo.gl/ShhCWqyneDV8P8aJ8",
+            "response_type": "image"
+          }
+        ]
+      },
+      "parent": "node_6_1597489337593",
+      "conditions": "@enquiry:list",
+      "dialog_node": "response_2_1597489395535",
+      "previous_sibling": "response_8_1597489354383"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "You'll get 500 off on purchase of 2000 or above"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_6_1597489337593",
+      "conditions": "@enquiry:offer",
+      "dialog_node": "response_8_1597489354383"
+    },
+    {
+      "type": "standard",
+      "title": "Offers",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#enquiry",
+      "dialog_node": "node_6_1597489337593",
+      "previous_sibling": "node_5_1597487792149"
+    },
+    {
+      "type": "standard",
+      "title": "Location",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#location",
+      "dialog_node": "node_5_1597487792149",
+      "previous_sibling": "node_3_1597487299309"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_5_1597492382985",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Product Faq's",
+      "actions": [
+        {
+          "name": "main_webhook",
+          "type": "webhook",
+          "parameters": {
+            "input": "<? input.text ?>"
+          },
+          "result_variable": "webhook_result_1"
+        }
+      ],
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#productfaq",
+      "dialog_node": "node_5_1597492382985",
+      "previous_sibling": "node_1_1597489655485"
+    },
+    {
+      "type": "standard",
+      "title": "Greet",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#greeting",
+      "dialog_node": "node_3_1597487299309",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "thank",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Ok byee..Meet you at the store"
+              },
+              {
+                "text": "Byee..See you soon.."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Thanks",
+      "dialog_node": "node_1_1597489655485",
+      "previous_sibling": "node_6_1597489337593"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "My first skill",
+  "language": "en",
+  "description": ""
+}
